@@ -17,9 +17,7 @@ on:
     secrets:
       NODE_AUTH_TOKEN:
         required: true
-      SSH_KEY:
-        required: true
-      CYPRESS_RECORD_KEY: 
+      CYPRESS_RECORD_KEY:
         required: true
 jobs:
   e2e-tests:
@@ -40,8 +38,6 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - name: Check out repository code
         uses: actions/checkout@v2
-      - name: Set up SSH key
-        run: bash .github/workflows/setup-ssh.sh ${{ secrets.SSH_KEY }}
       # Cypress installs and caches dependencies
       # because of "record" and "parallel" parameters
       # these containers will load balance all found tests among themselves
@@ -59,4 +55,3 @@ jobs:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
           GIT_BRANCH: ${{ github.ref_name }}
-
